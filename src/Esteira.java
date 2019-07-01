@@ -67,7 +67,7 @@ public class Esteira extends MotorLargo{
 	 */
 	public void ligaTras(int tempo) {
 		if(sincAtiva) this.motorLargo.startSynchronization();
-		this.motorLargo.forward();
+		this.motorLargo.backward();
 		Delay.msDelay(tempo * 1000);
 		this.motorLargo.stop();
 		if(sincAtiva) this.motorLargo.endSynchronization();
