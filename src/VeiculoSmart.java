@@ -60,11 +60,17 @@ public class VeiculoSmart extends Veiculo{
 			}
 			//this.ev3.corLed(7);
 			//this.ev3.beep2();
-			
 			this.stop();
-			this.curvaDireitaCorrecao();
-			while((!this.isPreto("esquerdo") && this.isPreto("direito")) || (this.isPreto("esquerdo") && !this.isPreto("direito"))
-					|| (!this.isPreto("esquerdo") && !this.isPreto("direito")));
+			if(this.getDistancia() < 9) {
+				this.fechaGarra();
+			}else {
+				this.curvaDireitaCorrecao();
+				while((!this.isPreto("esquerdo") && this.isPreto("direito")) || (this.isPreto("esquerdo") && !this.isPreto("direito"))
+						|| (!this.isPreto("esquerdo") && !this.isPreto("direito")));
+				this.stop();
+				this.segueLinhaAteBola();
+			}
+			
 		}
 	}
 	

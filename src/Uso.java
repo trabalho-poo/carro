@@ -8,7 +8,7 @@ public class Uso {
 		float PROPORCAO = 10.6666666667f;
 		//10.7 graus do motor = 1 grau de 360
 		List<Float> distancias = new LinkedList<Float>();
-		VeiculoSmart carro = new VeiculoSmart(false, true, true, false);
+		VeiculoSmart carro = new VeiculoSmart(false, true, true, true);
 		float anguloDireita, anguloEsquerda;
 		
 		//carro.setVelocidadeEsteirasGrau(480);
@@ -58,6 +58,7 @@ public class Uso {
 		carro.setEsteirasForward(1);
 		carro.segueLinha();
 		carro.curvaEsquerdaCorrecao(2);
+		carro.abreGarra();
 		carro.segueLinhaAteBola();
 // 		carro.resetTacometro();
 // 		carro.setVelocidadeEsteirasGrau(240);
