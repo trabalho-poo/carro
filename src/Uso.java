@@ -1,4 +1,5 @@
 import lejos.hardware.Button;
+import java.util.*;
 
 public class Uso {
 	
@@ -29,50 +30,89 @@ public class Uso {
 		 */
 //		Veiculo carro = new Veiculo(false,false,true);
 
-		/* Define velocidade de movimento em graus por segundo para x graus por segundo (GPS)
-		* o motor ira rotacionar as rodas que movimentam a esteira x graus em 1 segundo 
-		* e repetir.
-		* OBS: este metodo apenas seta a velocidade, ele nao gera movimento
-		*/
-		carro.setVelocidadeEsteirasGrau(360);
+	public static void main(String[] args)
+	{
+		float PROPORCAO = 10.6666666667f;
+		//10.7 graus do motor = 1 grau de 360
+		List<Float> distancias = new LinkedList<Float>();
+		VeiculoSmart carro = new VeiculoSmart(false, true, true, true);
+		float anguloDireita, anguloEsquerda;
 		
-		/*
-		 * Define velocidade de movimento em rotacoes por segundo (RPS)
-		 * 1 rotacao = 360 graus
-		 * motor ira rotacionar as rodas que movimento a esteira em x rotacoes por segundo 
-		 */
-		//carro.setVelocidadeEsteirasRotacao(1);
+		//carro.setVelocidadeEsteirasGrau(480);
+		//carro.curvaEsquerda(2);
+		//carro.recuaDireita(2);
+		//carro.setEsteirasBackward(2);
 		
-		/* Faz carro andar para frente por t segundos
-		 * Ele freia apos isso.
-		 * Para andar para frente indefinidamente basta nao colocar
-		 * nada como arguento.
-		 * Pode-se tambem redefinir a velocidade (em GPS) colocando-a como segundo argumento
-		 */
-		carro.setEsteirasForward(4);
-		
-		/* Faz carro andar para tras por t segundos
-		 * Ele freia apos isso.
-		 * Para andar para frente indefinidamente basta nao colocar
-		 * nada como arguento.
-		 * Pode-se tambem redefinir a velocidade (em GPS) colocando-a como segundo argumento
-		 */
-		carro.setEsteirasBackward(4);
-		
-		/*
-		 * Operacoes abaixo fazem o carro curvar por t segundos e parar
-		 * ou indefinidamente caso nao passe argumento
-		 * ao curvar a velocidade muda para 360 gps e os motores param a sincronizacao 
-		 * quando em versao de movimento sem tempo definido
-		 */
-//		carro.curvaDireita(2);
-//		carro.curvaEsquerda(2);
-		
-		/*
-		 * carro toca um sinal sonoro rapidamente
-		 * existem 5 opcoes: beep1, beep2, ..., beep5
-		 */
-//		carro.ev3.beep1();
+		/*while(Button.ESCAPE.isUp())
+		{
+			carro.coletaAmostras();
+			System.out.println("dir"+carro.amostras[0]+" esq" + carro.amostras[1]);
+		}*/
+		//carro.setVelocidadeEsteirasGrau(480);
+		//carro.setEsteirasForward(1);
+		//carro.curvaEsquerda(2);
+		//carro.curvaDireita(2);
+		//carro.setEsteirasBackward(2);
+		carro.fechaGarra();
+		carro.setVelocidadeEsteirasGrau(240);
+		carro.resetTacometro();
+		carro.encontraLinha();
+		distancias.add(carro.getTacometroDireito());
+		carro.resetTacometro();
+		if(carro.isPreto("esquerdo") && carro.isPreto("direito")) {
+			anguloDireita = 90;
+			anguloEsquerda = 90;
+		}
+		else if(carro.isPreto("esquerdo") && !carro.isPreto("direito")) {
+			carro.curvaEsquerda();
+			while(!carro.isPreto("direito"));
+			carro.stop();
+			anguloDireita = carro.getTacometroDireito() / PROPORCAO;
+			anguloEsquerda = 180 - anguloDireita;
+			carro.resetTacometro();
+		}
+		else if(!carro.isPreto("esquerdo") && carro.isPreto("direito")) {
+			carro.curvaDireitaCorrecao();
+			while(!carro.isPreto("esquerdo") && carro.isPreto("direito"));
+//			carro.ev3.corLed(7);
+//			carro.ev3.beep2();
+			carro.stop();
+			anguloEsquerda = carro.getTacometroEsquerdo() / PROPORCAO;
+			anguloDireita = 180 - anguloEsquerda;
+			carro.resetTacometro();
+		}
+		carro.ligaSincronizacaoEsteiras();
+		carro.setEsteirasForward(1);
+		carro.segueLinha();
+		carro.curvaEsquerdaCorrecao(2);
+		carro.abreGarra();
+		carro.segueLinhaAteBola();
+// 		carro.resetTacometro();
+// 		carro.setVelocidadeEsteirasGrau(240);
+//		carro.curvaEsquerda(4);
+//		//carro.abreGarra();
+//		carro.segueLinha();
+//		carro.resetTacometro();
+//		carro.ligaSincronizacaoEsteiras();
+//		carro.segueLinhaAteBola();
+		/*distancias.add(carro.getTacometroDireito());
+		carro.resetTacometro();
+		if(carro.getDistancia() == 3) {
+			carro.segueLinhaAteBola();
+			distancias.add(carro.getTacometroDireito());
+			carro.resetTacometro();
+		}
+		carro.seguraBola();
+		carro.voltaAoPontoDeOrigem();*/
+		/*carro.setVelocidadeEsteirasGrau(300);
+		carro.setEsteirasForward(3);
+		carro.ev3.beep3();
+		carro.setEsteirasBackward(3);
+		carro.ev3.beep3();
+		carro.curvaDireita(2);
+		carro.ev3.beep1();
+		carro.curvaEsquerda(2);
+		carro.ev3.beep4();
 		
 		/*
 		 * carro espera t segundos para realizar proximo comando
