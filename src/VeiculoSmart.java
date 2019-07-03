@@ -1,6 +1,9 @@
 /**
- * Classe para manipular os comandos do veiculo
- * @author  
+ * Classe que contem os metodos para manipular 
+ * os comandos do veiculo.
+ * 
+ * @author Grupo (Cleisson diLauro, Franco Flores, Guilherme Mattos, Luciano
+ *         Alves, Natalia Lopes)
  * @version 1.0(julho-2019)
  */
 public class VeiculoSmart extends Veiculo{
