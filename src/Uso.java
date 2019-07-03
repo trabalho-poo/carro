@@ -27,7 +27,7 @@ public class Uso {
 			anguloEsquerda = 90;
 		}
 		else if(carro.isPreto("esquerdo") && !carro.isPreto("direito")) {
-			carro.curvaEsquerda();
+			carro.curvaEsquerdaCorrecao();
 			while(!carro.isPreto("direito"));
 			carro.stop();
 			anguloDireita = carro.getTacometroDireito() / PROPORCAO;
@@ -57,32 +57,36 @@ public class Uso {
 		distancias.add(carro.getTacometroDireito());
 		//System.out.println(carro.getTacometroDireito() + "tacometro 2\n");
 		carro.resetTacometro();
-		if(carro.garra.isAberta()) {
-			carro.setVelocidadeEsteirasGrau(240);
-			carro.setEsteirasForward(1);
-			carro.fechaGarra();
-			carro.resetTacometro();
-			carro.ligaSincronizacaoEsteiras();
-			carro.setVelocidadeEsteirasGrau(240);
-		}else {
-			carro.curvaEsquerdaCorrecao(4);
-//			carro.curvaDireitaCorrecao();
-//			while((!carro.isPreto("esquerdo") && carro.isPreto("direito")) || (carro.isPreto("esquerdo") && !carro.isPreto("direito"))
-//					|| (!carro.isPreto("esquerdo") && !carro.isPreto("direito")));
+		carro.ligaSincronizacaoEsteiras();
+		if(!carro.isAchouBola()) {
+			carro.curvaEsquerdaCorrecao();
+			while((!carro.isPreto("esquerdo") && carro.isPreto("direito")) || (carro.isPreto("esquerdo") && !carro.isPreto("direito"))
+					|| (!carro.isPreto("esquerdo") && !carro.isPreto("direito")));
 			carro.stop();
 			carro.ligaSincronizacaoEsteiras();
 			carro.setVelocidadeEsteirasGrau(240);
 			carro.segueLinhaAteBola();
 			distancias.add(carro.getTacometroDireito());
-			//System.out.println(carro.getTacometroDireito() + "tacometro3\n");
-			if(carro.isAchouBola()) {
-				carro.setVelocidadeEsteirasGrau(240);
-				carro.setEsteirasForward(1);
-				carro.fechaGarra();
-				carro.resetTacometro();
-				carro.ligaSincronizacaoEsteiras();
-			}
 		}
+//		}else {
+//			carro.curvaEsquerdaCorrecao(4);
+//			carro.curvaDireitaCorrecao();
+//			while((!carro.isPreto("esquerdo") && carro.isPreto("direito")) || (carro.isPreto("esquerdo") && !carro.isPreto("direito"))
+//					|| (!carro.isPreto("esquerdo") && !carro.isPreto("direito")));
+//			carro.stop();
+//			carro.ligaSincronizacaoEsteiras();
+//			carro.setVelocidadeEsteirasGrau(240);
+//			carro.segueLinhaAteBola();
+//			distancias.add(carro.getTacometroDireito());
+//			//System.out.println(carro.getTacometroDireito() + "tacometro3\n");
+//			if(carro.isAchouBola()) {
+//				carro.setVelocidadeEsteirasGrau(240);
+//				carro.setEsteirasForward(1);
+//				carro.fechaGarra();
+//				carro.resetTacometro();
+//				carro.ligaSincronizacaoEsteiras();
+//			}
+//		}
 
 // 		carro.resetTacometro();
 // 		carro.setVelocidadeEsteirasGrau(240);
