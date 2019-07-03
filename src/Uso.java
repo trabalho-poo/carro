@@ -2,39 +2,15 @@ import lejos.hardware.Button;
 import java.util.*;
 
 public class Uso {
-	
-	public static void main(String[] args) {
-		/*
-		 * Cria instancia de carro e inicia ela com
-		 * 2 esteiras, garra e todos sensores ativos
-		 */
-		Veiculo carro =  new Veiculo(true, true, true);
-		/*
-		 * Cria instancia de carro e inicia ela com
-		 * 2 esteiras, garra e sensor de toque ativo
-		 */
-//		Veiculo carro = new Veiculo(true,false,false);
-		/*
-		 * Cria instancia de carro e inicia ela com
-		 * 2 esteiras, garra e nenhum sensor ativo
-		 */
-//		Veiculo carro = new Veiculo();
-		/*
-		 * Cria instancia de carro e inicia ela com
-		 * 2 esteiras, garra e sensor de cor ativo
-		 */
-//		Veiculo carro = new Veiculo(false,true,false);
-		/*
-		 * Cria instancia de carro e inicia ela com
-		 * 2 esteiras, garra e sensor infravermelho ativo
-		 */
-//		Veiculo carro = new Veiculo(false,false,true);
-
 	public static void main(String[] args)
 	{
 		float PROPORCAO = 10.6666666667f;
 		//10.7 graus do motor = 1 grau de 360
 		List<Float> distancias = new LinkedList<Float>();
+		/*
+		 * Cria instancia de carro e inicia ela com 2 esteiras 
+		 * sensor de cor Direito e Esquerdo ativos e infravermelho. 
+		 */
 		VeiculoSmart carro = new VeiculoSmart(false, true, true, true);
 		float anguloDireita = 0, anguloEsquerda = 0;
 		
