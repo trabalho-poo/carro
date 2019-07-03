@@ -9,28 +9,15 @@ public class Uso {
 		//10.7 graus do motor = 1 grau de 360
 		List<Float> distancias = new LinkedList<Float>();
 		VeiculoSmart carro = new VeiculoSmart(false, true, true, true);
-		float anguloDireita, anguloEsquerda;
+		float anguloDireita = 0, anguloEsquerda = 0;
 		
-		//carro.setVelocidadeEsteirasGrau(480);
-		//carro.curvaEsquerda(2);
-		//carro.recuaDireita(2);
-		//carro.setEsteirasBackward(2);
-		
-		/*while(Button.ESCAPE.isUp())
-		{
-			carro.coletaAmostras();
-			System.out.println("dir"+carro.amostras[0]+" esq" + carro.amostras[1]);
-		}*/
-		//carro.setVelocidadeEsteirasGrau(480);
-		//carro.setEsteirasForward(1);
-		//carro.curvaEsquerda(2);
-		//carro.curvaDireita(2);
-		//carro.setEsteirasBackward(2);
 		carro.fechaGarra();
+		carro.ligaSincronizacaoEsteiras();
 		carro.setVelocidadeEsteirasGrau(240);
 		carro.resetTacometro();
 		carro.encontraLinha();
 		distancias.add(carro.getTacometroDireito());
+		//System.out.println(carro.getTacometroDireito() + "tacometro\n");
 		carro.resetTacometro();
 		if(carro.isPreto("esquerdo") && carro.isPreto("direito")) {
 			anguloDireita = 90;
@@ -54,12 +41,46 @@ public class Uso {
 			anguloDireita = 180 - anguloEsquerda;
 			carro.resetTacometro();
 		}
+		//System.out.println(anguloDireita + "angDireita" + anguloEsquerda +  "angEsquerda\n");		
 		carro.ligaSincronizacaoEsteiras();
 		carro.setEsteirasForward(1);
-		carro.segueLinha();
-		carro.curvaEsquerdaCorrecao(2);
-		carro.abreGarra();
+		//carro.segueLinha();
+		carro.curvaEsquerda(4);
+		//carro.curvaEsquerdaCorrecao(2);
+		//carro.abreGarra();
+		carro.resetTacometro();
+		carro.ligaSincronizacaoEsteiras();
 		carro.segueLinhaAteBola();
+		distancias.add(carro.getTacometroDireito());
+		//System.out.println(carro.getTacometroDireito() + "tacometro 2\n");
+		carro.resetTacometro();
+		if(carro.garra.isAberta()) {
+			carro.setVelocidadeEsteirasGrau(240);
+			carro.setEsteirasForward(1);
+			carro.fechaGarra();
+			carro.resetTacometro();
+			carro.ligaSincronizacaoEsteiras();
+			carro.setVelocidadeEsteirasGrau(240);
+		}else {
+			carro.curvaEsquerdaCorrecao(4);
+//			carro.curvaDireitaCorrecao();
+//			while((!carro.isPreto("esquerdo") && carro.isPreto("direito")) || (carro.isPreto("esquerdo") && !carro.isPreto("direito"))
+//					|| (!carro.isPreto("esquerdo") && !carro.isPreto("direito")));
+			carro.stop();
+			carro.ligaSincronizacaoEsteiras();
+			carro.setVelocidadeEsteirasGrau(240);
+			carro.segueLinhaAteBola();
+			distancias.add(carro.getTacometroDireito());
+			//System.out.println(carro.getTacometroDireito() + "tacometro3\n");
+			if(carro.isAchouBola()) {
+				carro.setVelocidadeEsteirasGrau(240);
+				carro.setEsteirasForward(1);
+				carro.fechaGarra();
+				carro.resetTacometro();
+				carro.ligaSincronizacaoEsteiras();
+			}
+		}
+
 // 		carro.resetTacometro();
 // 		carro.setVelocidadeEsteirasGrau(240);
 //		carro.curvaEsquerda(4);
@@ -77,36 +98,6 @@ public class Uso {
 		}
 		carro.seguraBola();
 		carro.voltaAoPontoDeOrigem();*/
-		/*carro.setVelocidadeEsteirasGrau(300);
-		carro.setEsteirasForward(3);
-		carro.ev3.beep3();
-		carro.setEsteirasBackward(3);
-		carro.ev3.beep3();
-		carro.curvaDireita(2);
-		carro.ev3.beep1();
-		carro.curvaEsquerda(2);
-		carro.ev3.beep4();
-		
-		
-		carro.segueLinha("direito");
-		
-		
-		carro.recuaAteColidir();
-		
-		
-		int comando = 0;
-		while(comando!=9)
-		{
-			comando = carro.getComando();
-			if(comando == 1) carro.setEsteirasForward();
-			if(comando == 2) carro.setEsteirasBackward();
-			if(comando == 3) carro.curvaDireita();
-			if(comando == 4) carro.curvaEsquerda();
-			if(comando == 5 && carro.garra.isFechada()) carro.abreGarra();
-			if(comando == 6 && carro.garra.isAberta()) carro.fechaGarra();
-			if(comando == 7) carro.stop();
-		}
-		*/
 		carro.ev3.beep5();
 		carro.ev3.corLed(3);
 	}
