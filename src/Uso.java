@@ -1,6 +1,14 @@
 import lejos.hardware.Button;
 import java.util.*;
 
+/**
+ * Classe a utilizacao do carro.
+ * 
+ * @author Grupo (Cleisson diLauro, Franco Flores, Guilherme Mattos, Luciano
+ *         Alves, Natalia Lopes)
+ * @version 1.0 (junho-2019)
+ */
+
 public class Uso {
 	public static void main(String[] args)
 	{
