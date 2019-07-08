@@ -7,13 +7,23 @@
  * @version 1.0(julho-2019)
  */
 public class VeiculoSmart extends Veiculo{
-	// 10.6666666667 graus do motor = 1 grau de 360
+	/* 10.6666666667 graus do motor = 1 grau de 360 */
 	private float PROPORCAO = 10.6666666667f;
+
+	/* Vetor para armazenar as distancias */
 	private float[] distancias = new float[2];
+	
+	/* Variaveis que armazenam os angulos de chegada
+	 * e angulos de ajuste para volta do carro 
+	 * */
 	private float anguloDireita = 0, anguloEsquerda = 0, anguloRetorno = 0, distanciaRetorno = 0;
+
+	/* Inicializa a variavel para comparacao se achou bola. */
 	private boolean achouBolaNaEsquerda = false, achouBola = false;
+	
 	/**
-	 * construtor de veiculo definindo quais sensores serao ativados
+	 * Construtor de veiculo definindo quais sensores serao ativados
+	 * 
 	 * @param toque : boolean ativa sensor de toque
 	 * @param colorDir : boolean ativa sensor de cor Direito
 	 * @param colorEsq : boolean ativa sensor de cor Esquerdo
@@ -33,6 +43,7 @@ public class VeiculoSmart extends Veiculo{
 
 	/**
 	 * Metodo para pegar quantos graus o motor direito girou
+	 * 
 	 * @return this.dir.getTacometro() : quantidade de graus que o motor direito girou
 	 */
 	public float getTacometroDireito() {
@@ -261,7 +272,7 @@ public class VeiculoSmart extends Veiculo{
 
 	/**
 	 * Metodo para veiculo virar para a esquerda no proprio eixo durante um determinado tempo
-	 * @param tempo
+	 * @param tempo : para uma esteira andar
 	 */
 	public void curvaEsquerdaNoEixo(int tempo)
 	{
@@ -275,7 +286,7 @@ public class VeiculoSmart extends Veiculo{
 
 	/**
 	 * Metodo para veiculo virar para a direita no proprio eixo durante um determinado tempo
-	 * @param tempo
+	 * @param tempo : para uma esteira andar
 	 */
 	public void curvaDireitaNoEixo(int tempo)
 	{
@@ -288,10 +299,10 @@ public class VeiculoSmart extends Veiculo{
 	}
 
 	/**
-	 * Metodo para calcular a distancia que o carro tera que percorrer ate o ponto de origem
-	 * @param distancias
-	 * @param angulo
-	 * @return distancia de retorno
+	 * Metodo para calcular a distancia (Lei dos cossenos) que o carro tera que percorrer ate o ponto de origem
+	 * a^2 = b^2 + c^2 - 2*b*c*cos(angulo)
+	 * 
+	 * @param angulo : Angulo em que o carro chegou na fita preta
 	 */
 	public void calculaDistanciaRetorno(float angulo) {
 		this.distanciaRetorno = (float) (Math.sqrt((this.distancias[0] * this.distancias[0]) + (this.distancias[1] * this.distancias[1])
@@ -300,9 +311,8 @@ public class VeiculoSmart extends Veiculo{
 
 	/**
 	 * Metodo para calcular o angulo que o carro tera que virar para voltar ao ponto de origem
-	 * @param distancias
-	 * @param distanciaRetorno
-	 * @return angulo de retorno
+	 * 
+	 * a^2 = b^2 + c^2 - 2*b*c*cos(angulo)
 	 */
 	public void calculaAnguloRetorno() {
 		this.anguloRetorno = (float) ((this.distanciaRetorno * this.distanciaRetorno - this.distancias[0] * this.distancias[0] + 
