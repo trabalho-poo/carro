@@ -104,7 +104,10 @@ public class VeiculoSmart extends Veiculo{
 	/**
 	 * Metodo para controlar o carro dentro da linha preta ate chegar
 	 * no final ou encontrar a bola, caso encontre a bola, pega a mesma
+	 * 
+	 * Sobrecarga do metodo segueLinha
 	 */
+	
 	public void segueLinha() {
 		if(this.corDirAtivo && this.corEsqAtivo)
 		{
@@ -128,7 +131,7 @@ public class VeiculoSmart extends Veiculo{
 				this.segueLinha();
 			}
 			//Se o carro encontra a bola, chama o metodo para pegar a mesma
-			else if(this.getDistancia() < 6) {
+			else if(this.getDistancia() <= 6 && !this.achouBola) {
 				this.stop();
 				this.achouBola = true;
 				this.pegaBolaNaLinha();
@@ -221,10 +224,13 @@ public class VeiculoSmart extends Veiculo{
 		//Se o carro achou bola na esquerda, ele tem que virar pra direita para voltar ao ponto de origem
 		else {
 			this.calculaDistanciaRetorno(anguloDireita);
+			//calcula o cosseno do angulo
 			this.calculaAnguloRetorno();
+			//180 - o angulo de fato
 			this.anguloRetorno = 180 - (float) (Math.acos(anguloRetorno));
 			this.anguloRetorno = this.anguloRetorno * PROPORCAO;
 			//this.ev3.beep1();
+			//tem de curva até dar o angulo
 			this.curvaDireita((int)(anguloRetorno / 240.0 + 1));
 			//this.ev3.beep1();
 			this.ligaSincronizacaoEsteiras();
