@@ -14,6 +14,11 @@ public class Veiculo {
 	public float[] amostras;
 	public static int delayEntreMotores = 100;
 	
+	public enum Lado {
+		DIREITO, ESQUERDO;
+	}
+	
+	
 	/**
 	 * construtor de veiculo definindo quais sensores <br>
 	 * serao ativados.
