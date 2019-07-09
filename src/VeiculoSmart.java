@@ -53,6 +53,7 @@ public class VeiculoSmart extends Veiculo{
 	public void encontraLinha() {
 		if(this.corDirAtivo && this.corEsqAtivo)
 		{
+			this.resetTacometro();
 			this.setVelocidadeEsteirasGrau(240);
 			this.setEsteirasForward();
 			while(!this.isPreto("esquerdo") && !this.isPreto("direito"));
