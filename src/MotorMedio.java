@@ -5,27 +5,28 @@ public abstract class MotorMedio extends Motor {
 	public EV3MediumRegulatedMotor motor;
 	public MotorMedio()
 	{
-		motor = new EV3MediumRegulatedMotor(MotorPort.A);	
+		motor = new EV3MediumRegulatedMotor(MotorPort.A);
 	}
-	
+
 	@Override
 	public void closeMotor()
 	{
 		this.motor.stop();
 		this.motor.close();
 	}
-	
+
 
 	@Override
 	public void setVelocidadeRps(float rps) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setVelocidadeGps(float rps) {
 		// TODO Auto-generated method stub
-		
+		//DUVIDA recebe em rps ou gps
+
 	}
 
 	@Override
